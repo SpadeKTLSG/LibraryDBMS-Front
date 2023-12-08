@@ -126,13 +126,13 @@
             </p>
             <p>
               <i class="el-icon-chat-dot-round"></i> 微信：<a
-                href="javascript:;"
+                href="javascript:"
                 >/ *若依</a
               >
             </p>
             <p>
               <i class="el-icon-money"></i> 支付宝：<a
-                href="javascript:;"
+                href="javascript:"
                 class="支付宝信息"
                 >/ *若依</a
               >

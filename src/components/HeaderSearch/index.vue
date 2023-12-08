@@ -37,7 +37,7 @@ function click() {
   if (show.value) {
     headerSearchSelectRef.value && headerSearchSelectRef.value.focus()
   }
-};
+}
 function close() {
   headerSearchSelectRef.value && headerSearchSelectRef.value.blur()
   options.value = []

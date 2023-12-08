@@ -76,7 +76,7 @@ function hasOneShowingChild(children = [], parent) {
   }
 
   return false
-};
+}
 
 function resolvePath(routePath, routeQuery) {
   if (isExternal(routePath)) {

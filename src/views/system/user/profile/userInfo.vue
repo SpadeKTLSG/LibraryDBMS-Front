@@ -51,12 +51,12 @@ function submit() {
       });
     }
   });
-};
+}
 
 /** 关闭按钮 */
 function close() {
   proxy.$tab.closePage();
-};
+}
 
 // 回显当前登录用户信息
 watch(() => props.user, user => {

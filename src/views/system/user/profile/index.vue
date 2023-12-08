@@ -81,7 +81,7 @@ function getUser() {
     state.roleGroup = response.roleGroup;
     state.postGroup = response.postGroup;
   });
-};
+}
 
 getUser();
 </script>
