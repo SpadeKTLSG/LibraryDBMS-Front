@@ -1,2 +1,5 @@
 SpadeK探索记录
 
+12.9 替换前端资源, 修改展示的若依字段
+     已经完全替换为自己的项目
+     [收款码生成](https://www.rocschool.com/tool/qr/)
