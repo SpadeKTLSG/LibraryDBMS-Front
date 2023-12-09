@@ -11,26 +11,26 @@
 
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" teleported>
       <template v-if="item.meta" #title>
-        <svg-icon :icon-class="item.meta && item.meta.icon" />
+        <svg-icon :icon-class="item.meta && item.meta.icon"/>
         <span class="menu-title" :title="hasTitle(item.meta.title)">{{ item.meta.title }}</span>
       </template>
 
       <sidebar-item
-        v-for="(child, index) in item.children"
-        :key="child.path + index"
-        :is-nest="true"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-        class="nest-menu"
+          v-for="(child, index) in item.children"
+          :key="child.path + index"
+          :is-nest="true"
+          :item="child"
+          :base-path="resolvePath(child.path)"
+          class="nest-menu"
       />
     </el-sub-menu>
   </div>
 </template>
 
 <script setup>
-import { isExternal } from '@/utils/validate'
+import {isExternal} from '@/utils/validate'
 import AppLink from './Link'
-import { getNormalPath } from '@/utils/ruoyi'
+import {getNormalPath} from '@/utils/ruoyi'
 
 const props = defineProps({
   // route object
@@ -71,7 +71,7 @@ function hasOneShowingChild(children = [], parent) {
 
   // Show parent if there are no child router to display
   if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
+    onlyOneChild.value = {...parent, path: '', noShowingChildren: true}
     return true
   }
 
@@ -87,12 +87,12 @@ function resolvePath(routePath, routeQuery) {
   }
   if (routeQuery) {
     let query = JSON.parse(routeQuery);
-    return { path: getNormalPath(props.basePath + '/' + routePath), query: query }
+    return {path: getNormalPath(props.basePath + '/' + routePath), query: query}
   }
   return getNormalPath(props.basePath + '/' + routePath)
 }
 
-function hasTitle(title){
+function hasTitle(title) {
   if (title.length > 5) {
     return title;
   } else {

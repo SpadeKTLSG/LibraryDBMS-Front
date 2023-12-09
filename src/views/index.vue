@@ -199,6 +199,15 @@
                 MORE
               </el-link>
             </p>
+            <p>
+              <i class="el-icon-s-promotion"></i> 成员介绍
+              <el-link
+                  href="https://gitee.com/SpadeKTLSG/library-dbms-front"
+                  target="_blank"
+              >
+                MORE
+              </el-link>
+            </p>
           </div>
         </el-card>
       </el-col>
