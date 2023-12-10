@@ -17,13 +17,6 @@
         </p>
         <p>
 
-          <!--          <el-button-->
-          <!--              type="primary"-->
-          <!--              icon="Cloudy"-->
-          <!--              plain-->
-          <!--              @click="goTarget('https://gitee.com/SpadeKTLSG/library-dbms-front')"-->
-          <!--          >前端Gitee-->
-          <!--          </el-button>-->
 
           <el-button
               type="primary"
@@ -33,13 +26,6 @@
           >前端
           </el-button>
 
-          <!--          <el-button-->
-          <!--              type="primary"-->
-          <!--              icon="Cloudy"-->
-          <!--              plain-->
-          <!--              @click="goTarget('https://gitee.com/SpadeKTLSG/LibraryDBMS')"-->
-          <!--          >后端Gitee-->
-          <!--          </el-button>-->
 
           <el-button
               type="primary"
