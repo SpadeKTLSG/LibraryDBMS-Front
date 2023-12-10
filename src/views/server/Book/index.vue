@@ -164,9 +164,6 @@
         <el-form-item label="出版商" prop="publishingHouse">
           <el-input v-model="form.publishingHouse" placeholder="请输入出版商"/>
         </el-form-item>
-        <el-form-item label="概要" prop="summary">
-          <el-input v-model="form.summary" type="textarea" placeholder="请输入内容"/>
-        </el-form-item>
         <el-form-item label="书架序号" prop="bookshelfNumber">
           <el-input v-model="form.bookshelfNumber" placeholder="请输入书架序号"/>
         </el-form-item>
@@ -191,7 +188,7 @@
 </template>
 
 <script setup name="Book">
-import {listBook, getBook, delBook, addBook, updateBook} from "@/api/server/Book";
+import {addBook, delBook, getBook, listBook, updateBook} from "@/api/server/Book";
 
 const {proxy} = getCurrentInstance();
 
