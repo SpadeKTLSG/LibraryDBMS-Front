@@ -48,6 +48,7 @@
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
+
         <el-button
             :loading="loading"
             size="large"
@@ -58,6 +59,7 @@
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
+
         <div style="float: right;" v-if="register">
           <router-link class="link-type" :to="'/register'">立即注册</router-link>
         </div>
@@ -99,8 +101,8 @@ const codeUrl = ref("");
 const loading = ref(false);
 // 验证码开关
 const captchaEnabled = ref(true);
-// 注册开关
-const register = ref(false);
+// 注册开关 设置为打开
+const register = ref(true);
 const redirect = ref(undefined);
 
 watch(route, (newRoute) => {

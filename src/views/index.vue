@@ -61,7 +61,7 @@
       <el-col :sm="24" :lg="12" style="padding-left: 50px">
         <el-row>
           <el-col :span="12">
-            <h2>技术选型</h2>
+            <h2>项目亮点</h2>
           </el-col>
         </el-row>
         <el-row>
@@ -69,7 +69,6 @@
             <h4>后端技术</h4>
             <ul>
               <li>SpringBoot</li>
-              <li>Spring Security</li>
               <li>JWT</li>
               <li>MyBatis</li>
               <li>Druid</li>
@@ -81,19 +80,35 @@
             <h4>前端技术</h4>
             <ul>
               <li>Vue</li>
-              <li>Vuex</li>
               <li>Element-ui</li>
               <li>Axios</li>
-              <li>Sass</li>
-              <li>Quill</li>
               <li>...</li>
+            </ul>
+          </el-col>
+          <el-col :span="6">
+            <h4>团队管理</h4>
+            <ul>
+              <li>奴隶契约制</li>
+              <li>前后端分离</li>
+              <li>...</li>
+            </ul>
+          </el-col>
+          <el-col :span="6">
+            <h4>业务开发</h4>
+            <ul>
+              <li>敏捷开发</li>
+              <li>...</li>
+
             </ul>
           </el-col>
         </el-row>
       </el-col>
     </el-row>
 
+
     <el-divider/>
+
+
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
         介绍: 图书馆管理系统，基于Vue3.0+Element-Plus+SpringBoot+MyBatis-Plus开发的前后端分离的后台管理系统
@@ -101,6 +116,7 @@
         <hr/>
       </el-col>
     </el-row>
+
 
     <el-row :gutter="20">
 
@@ -198,10 +214,8 @@
         </el-card>
       </el-col>
 
+
     </el-row>
-
-    <!--末尾衬线    <el-divider/>-->
-
 
   </div>
 
