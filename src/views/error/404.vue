@@ -18,7 +18,7 @@
           页面跑丢了哦~
         </div>
         <router-link to="/index" class="bullshit__return-home">
-          这个是回首页的链接
+          点我回首页
         </router-link>
       </div>
     </div>
