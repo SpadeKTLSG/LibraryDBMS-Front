@@ -1,5 +1,8 @@
 <template>
+
   <div class="app-container">
+
+    <!--    这个是-->
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="名称" prop="bookName">
         <el-input
@@ -71,6 +74,7 @@
       </el-form-item>
     </el-form>
 
+    <!--    -->
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
@@ -188,6 +192,7 @@
 </template>
 
 <script setup name="Book">
+//从js导入
 import {addBook, delBook, getBook, listBook, updateBook} from "@/api/server/Book";
 
 const {proxy} = getCurrentInstance();
