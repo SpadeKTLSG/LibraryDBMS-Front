@@ -1,4 +1,6 @@
 import request from '@/utils/request'
+import axios from "axios";
+import {__esModule as typeOptions} from "vue-cropper/dist/vue-cropper.umd.js";
 
 // 查询书籍列表
 export function listBook(query) {
@@ -40,5 +42,21 @@ export function delBook(bookId) {
     return request({
         url: '/server/Book/' + bookId,
         method: 'delete'
+    })
+}
+
+// 修改部分：添加了一个 getTypeOptions 方法，用来发送 axios 请求到后端接口，获取类型列表，并赋值给 typeOptions 数组
+// export function getTypeOptions() {
+//     axios.get('/api/server/Book/getTypeOptions').then(response => {
+//         typeOptions.value = response.data;
+//     });
+//     return typeOptions;
+// }
+
+// 查询书籍类型列表
+export function getTypeOptions() {
+    return request({
+        url: '/server/Book/getTypeOptions',
+        method: 'get'
     })
 }

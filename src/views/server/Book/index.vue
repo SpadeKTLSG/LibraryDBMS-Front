@@ -2,7 +2,6 @@
 
   <div class="app-container">
 
-    <!--    这个是-->
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="名称" prop="bookName">
         <el-input
@@ -159,8 +158,15 @@
         <el-form-item label="作者" prop="author">
           <el-input v-model="form.author" placeholder="请输入作者"/>
         </el-form-item>
-        <el-form-item label="类型" prop="bookType">
-          <el-input v-model="form.bookType" placeholder="请输入类型"/>
+        <el-form-item label="类型" prop="bookType" style="width: 100%">
+          <el-select v-model="form.bookType" placeholder="请选择类型" lable-with="60px">
+            <el-option
+                v-for="item in typeOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="价格" prop="bookPrice">
           <el-input v-model="form.bookPrice" placeholder="请输入价格"/>
@@ -193,7 +199,7 @@
 
 <script setup name="Book">
 //从js导入
-import {addBook, delBook, getBook, listBook, updateBook} from "@/api/server/Book";
+import {addBook, delBook, getBook, getTypeOptions, listBook, updateBook} from "@/api/server/Book";
 
 const {proxy} = getCurrentInstance();
 
@@ -209,6 +215,8 @@ const title = ref("");
 
 //! data 构建
 const data = reactive({
+  //! 修改部分：添加了一个 typeOptions 数组，用来存储从后端获取的类型列表
+  typeOptions: [],
   form: {},
   queryParams: {
     pageNum: 1,
@@ -235,6 +243,7 @@ const data = reactive({
       {required: true, message: "书架序号不能为空", trigger: "blur"}
     ],
   }
+
 });
 
 const {queryParams, form, rules} = toRefs(data);
@@ -350,5 +359,10 @@ function handleExport() {
   }, `Book_${new Date().getTime()}.xlsx`)
 }
 
-getList();
+
+// 修改部分：在 mounted 钩子中调用了 getTypeOptions 方法，以便在页面加载时就获取类型列表
+onMounted(() => {
+  getList();
+  getTypeOptions();
+});
 </script>
