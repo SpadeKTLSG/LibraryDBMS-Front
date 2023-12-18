@@ -3,10 +3,10 @@
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="书架类型" prop="bookshelfType">
         <el-input
-          v-model="queryParams.bookshelfType"
-          placeholder="请输入书架类型"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.bookshelfType"
+            placeholder="请输入书架类型"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
@@ -18,49 +18,53 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['server:Bookshelf:add']"
-        >新增</el-button>
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['server:Bookshelf:add']"
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['server:Bookshelf:edit']"
-        >修改</el-button>
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['server:Bookshelf:edit']"
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['server:Bookshelf:remove']"
-        >删除</el-button>
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['server:Bookshelf:remove']"
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['server:Bookshelf:export']"
-        >导出</el-button>
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['server:Bookshelf:export']"
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="BookshelfList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="书架序号" align="center" prop="bookshelfNumber" />
-      <el-table-column label="书架类型" align="center" prop="bookshelfType" />
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="书架序号" align="center" prop="bookshelfNumber"/>
+      <el-table-column label="书架类型" align="center" prop="bookshelfType"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['server:Bookshelf:edit']">修改</el-button>
@@ -68,20 +72,20 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
     <!-- 添加或修改书架对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="BookshelfRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="书架类型" prop="bookshelfType">
-          <el-input v-model="form.bookshelfType" placeholder="请输入书架类型" />
+          <el-input v-model="form.bookshelfType" placeholder="请输入书架类型"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -95,9 +99,9 @@
 </template>
 
 <script setup name="Bookshelf">
-import { listBookshelf, getBookshelf, delBookshelf, addBookshelf, updateBookshelf } from "@/api/server/Bookshelf";
+import {addBookshelf, delBookshelf, getBookshelf, listBookshelf, updateBookshelf} from "@/api/server/Bookshelf";
 
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 
 const BookshelfList = ref([]);
 const open = ref(false);
@@ -116,11 +120,10 @@ const data = reactive({
     pageSize: 10,
     bookshelfType: null
   },
-  rules: {
-  }
+  rules: {}
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const {queryParams, form, rules} = toRefs(data);
 
 /** 查询书架列表 */
 function getList() {
@@ -208,12 +211,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _bookshelfNumbers = row.bookshelfNumber || ids.value;
-  proxy.$modal.confirm('是否确认删除书架编号为"' + _bookshelfNumbers + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除书架编号为"' + _bookshelfNumbers + '"的数据项？').then(function () {
     return delBookshelf(_bookshelfNumbers);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */

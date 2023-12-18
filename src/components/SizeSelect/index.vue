@@ -2,7 +2,7 @@
   <div>
     <el-dropdown trigger="click" @command="handleSetSize">
       <div class="size-icon--style">
-        <svg-icon class-name="size-icon" icon-class="size" />
+        <svg-icon class-name="size-icon" icon-class="size"/>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
@@ -22,11 +22,11 @@ const appStore = useAppStore();
 const size = computed(() => appStore.size);
 const route = useRoute();
 const router = useRouter();
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 const sizeOptions = ref([
-  { label: "较大", value: "large" },
-  { label: "默认", value: "default" },
-  { label: "稍小", value: "small" },
+  {label: "较大", value: "large"},
+  {label: "默认", value: "default"},
+  {label: "稍小", value: "small"},
 ]);
 
 function handleSetSize(size) {

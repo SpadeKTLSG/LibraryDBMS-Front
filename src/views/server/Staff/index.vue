@@ -3,26 +3,26 @@
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="员工姓名" prop="staffName">
         <el-input
-          v-model="queryParams.staffName"
-          placeholder="请输入员工姓名"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.staffName"
+            placeholder="请输入员工姓名"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="员工科室" prop="staffOffice">
         <el-input
-          v-model="queryParams.staffOffice"
-          placeholder="请输入员工科室"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.staffOffice"
+            placeholder="请输入员工科室"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="员工薪资" prop="staffWages">
         <el-input
-          v-model="queryParams.staffWages"
-          placeholder="请输入员工薪资"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.staffWages"
+            placeholder="请输入员工薪资"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
@@ -34,51 +34,55 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['server:Staff:add']"
-        >新增</el-button>
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['server:Staff:add']"
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['server:Staff:edit']"
-        >修改</el-button>
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['server:Staff:edit']"
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['server:Staff:remove']"
-        >删除</el-button>
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['server:Staff:remove']"
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['server:Staff:export']"
-        >导出</el-button>
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['server:Staff:export']"
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="StaffList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="员工号" align="center" prop="staffId" />
-      <el-table-column label="员工姓名" align="center" prop="staffName" />
-      <el-table-column label="员工科室" align="center" prop="staffOffice" />
-      <el-table-column label="员工薪资" align="center" prop="staffWages" />
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="员工号" align="center" prop="staffId"/>
+      <el-table-column label="员工姓名" align="center" prop="staffName"/>
+      <el-table-column label="员工科室" align="center" prop="staffOffice"/>
+      <el-table-column label="员工薪资" align="center" prop="staffWages"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['server:Staff:edit']">修改</el-button>
@@ -86,26 +90,26 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
     <!-- 添加或修改员工对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="StaffRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="员工姓名" prop="staffName">
-          <el-input v-model="form.staffName" placeholder="请输入员工姓名" />
+          <el-input v-model="form.staffName" placeholder="请输入员工姓名"/>
         </el-form-item>
         <el-form-item label="员工科室" prop="staffOffice">
-          <el-input v-model="form.staffOffice" placeholder="请输入员工科室" />
+          <el-input v-model="form.staffOffice" placeholder="请输入员工科室"/>
         </el-form-item>
         <el-form-item label="员工薪资" prop="staffWages">
-          <el-input v-model="form.staffWages" placeholder="请输入员工薪资" />
+          <el-input v-model="form.staffWages" placeholder="请输入员工薪资"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -119,9 +123,9 @@
 </template>
 
 <script setup name="Staff">
-import { listStaff, getStaff, delStaff, addStaff, updateStaff } from "@/api/server/Staff";
+import {addStaff, delStaff, getStaff, listStaff, updateStaff} from "@/api/server/Staff";
 
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 
 const StaffList = ref([]);
 const open = ref(false);
@@ -142,11 +146,10 @@ const data = reactive({
     staffOffice: null,
     staffWages: null
   },
-  rules: {
-  }
+  rules: {}
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const {queryParams, form, rules} = toRefs(data);
 
 /** 查询员工列表 */
 function getList() {
@@ -236,12 +239,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _staffIds = row.staffId || ids.value;
-  proxy.$modal.confirm('是否确认删除员工编号为"' + _staffIds + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除员工编号为"' + _staffIds + '"的数据项？').then(function () {
     return delStaff(_staffIds);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */

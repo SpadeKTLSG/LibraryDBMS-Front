@@ -1,23 +1,25 @@
 <template>
   <div class="component-upload-image">
     <el-upload
-      multiple
-      :action="uploadImgUrl"
-      list-type="picture-card"
-      :on-success="handleUploadSuccess"
-      :before-upload="handleBeforeUpload"
-      :limit="limit"
-      :on-error="handleUploadError"
-      :on-exceed="handleExceed"
-      ref="imageUpload"
-      :before-remove="handleDelete"
-      :show-file-list="true"
-      :headers="headers"
-      :file-list="fileList"
-      :on-preview="handlePictureCardPreview"
-      :class="{ hide: fileList.length >= limit }"
+        multiple
+        :action="uploadImgUrl"
+        list-type="picture-card"
+        :on-success="handleUploadSuccess"
+        :before-upload="handleBeforeUpload"
+        :limit="limit"
+        :on-error="handleUploadError"
+        :on-exceed="handleExceed"
+        ref="imageUpload"
+        :before-remove="handleDelete"
+        :show-file-list="true"
+        :headers="headers"
+        :file-list="fileList"
+        :on-preview="handlePictureCardPreview"
+        :class="{ hide: fileList.length >= limit }"
     >
-      <el-icon class="avatar-uploader-icon"><plus /></el-icon>
+      <el-icon class="avatar-uploader-icon">
+        <plus/>
+      </el-icon>
     </el-upload>
     <!-- 上传提示 -->
     <div class="el-upload__tip" v-if="showTip">
@@ -32,21 +34,21 @@
     </div>
 
     <el-dialog
-      v-model="dialogVisible"
-      title="预览"
-      width="800px"
-      append-to-body
+        v-model="dialogVisible"
+        title="预览"
+        width="800px"
+        append-to-body
     >
       <img
-        :src="dialogImageUrl"
-        style="display: block; max-width: 100%; margin: 0 auto"
+          :src="dialogImageUrl"
+          style="display: block; max-width: 100%; margin: 0 auto"
       />
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { getToken } from "@/utils/auth";
+import {getToken} from "@/utils/auth";
 
 const props = defineProps({
   modelValue: [String, Object, Array],
@@ -72,7 +74,7 @@ const props = defineProps({
   },
 });
 
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 const emit = defineEmits();
 const number = ref(0);
 const uploadList = ref([]);
@@ -80,10 +82,10 @@ const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 const baseUrl = import.meta.env.VITE_APP_BASE_API;
 const uploadImgUrl = ref(import.meta.env.VITE_APP_BASE_API + "/common/upload"); // 上传的图片服务器地址
-const headers = ref({ Authorization: "Bearer " + getToken() });
+const headers = ref({Authorization: "Bearer " + getToken()});
 const fileList = ref([]);
 const showTip = computed(
-  () => props.isShowTip && (props.fileType || props.fileSize)
+    () => props.isShowTip && (props.fileType || props.fileSize)
 );
 
 watch(() => props.modelValue, val => {
@@ -94,9 +96,9 @@ watch(() => props.modelValue, val => {
     fileList.value = list.map(item => {
       if (typeof item === "string") {
         if (item.indexOf(baseUrl) === -1) {
-          item = { name: baseUrl + item, url: baseUrl + item };
+          item = {name: baseUrl + item, url: baseUrl + item};
         } else {
-          item = { name: item, url: item };
+          item = {name: item, url: item};
         }
       }
       return item;
@@ -105,7 +107,7 @@ watch(() => props.modelValue, val => {
     fileList.value = [];
     return [];
   }
-},{ deep: true, immediate: true });
+}, {deep: true, immediate: true});
 
 // 上传前loading加载
 function handleBeforeUpload(file) {
@@ -125,7 +127,7 @@ function handleBeforeUpload(file) {
   }
   if (!isImg) {
     proxy.$modal.msgError(
-      `文件格式不正确, 请上传${props.fileType.join("/")}图片格式文件!`
+        `文件格式不正确, 请上传${props.fileType.join("/")}图片格式文件!`
     );
     return false;
   }
@@ -148,7 +150,7 @@ function handleExceed() {
 // 上传成功回调
 function handleUploadSuccess(res, file) {
   if (res.code === 200) {
-    uploadList.value.push({ name: res.fileName, url: res.fileName });
+    uploadList.value.push({name: res.fileName, url: res.fileName});
     uploadedSuccessfully();
   } else {
     number.value--;
@@ -208,6 +210,6 @@ function listToString(list, separator) {
 <style scoped lang="scss">
 // .el-upload--picture-card 控制加号部分
 :deep(.hide .el-upload--picture-card) {
-    display: none;
+  display: none;
 }
 </style>

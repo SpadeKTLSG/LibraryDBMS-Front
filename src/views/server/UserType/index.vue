@@ -111,7 +111,7 @@
 </template>
 
 <script setup name="UserType">
-import {listUserType, getUserType, delUserType, addUserType, updateUserType} from "@/api/server/UserType";
+import {addUserType, delUserType, getUserType, listUserType, updateUserType} from "@/api/server/UserType";
 
 const {proxy} = getCurrentInstance();
 

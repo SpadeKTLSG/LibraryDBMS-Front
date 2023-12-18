@@ -2,20 +2,20 @@
   <div class="top-right-btn" :style="style">
     <el-row>
       <el-tooltip class="item" effect="dark" :content="showSearch ? '隐藏搜索' : '显示搜索'" placement="top" v-if="search">
-        <el-button circle icon="Search" @click="toggleSearch()" />
+        <el-button circle icon="Search" @click="toggleSearch()"/>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="刷新" placement="top">
-        <el-button circle icon="Refresh" @click="refresh()" />
+        <el-button circle icon="Refresh" @click="refresh()"/>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="显隐列" placement="top" v-if="columns">
         <el-button circle icon="Menu" @click="showColumn()" v-if="showColumnsType == 'transfer'"/>
         <el-dropdown trigger="click" :hide-on-click="false" style="padding-left: 12px" v-if="showColumnsType == 'checkbox'">
-          <el-button circle icon="Menu" />
+          <el-button circle icon="Menu"/>
           <template #dropdown>
             <el-dropdown-menu>
               <template v-for="item in columns" :key="item.key">
                 <el-dropdown-item>
-                  <el-checkbox :checked="item.visible" @change="checkboxChange($event, item.label)" :label="item.label" />
+                  <el-checkbox :checked="item.visible" @change="checkboxChange($event, item.label)" :label="item.label"/>
                 </el-dropdown-item>
               </template>
             </el-dropdown-menu>
@@ -25,10 +25,10 @@
     </el-row>
     <el-dialog :title="title" v-model="open" append-to-body>
       <el-transfer
-        :titles="['显示', '隐藏']"
-        v-model="value"
-        :data="columns"
-        @change="dataChange"
+          :titles="['显示', '隐藏']"
+          v-model="value"
+          :data="columns"
+          @change="dataChange"
       ></el-transfer>
     </el-dialog>
   </div>
@@ -124,9 +124,11 @@ function checkboxChange(event, label) {
   display: block;
   margin-left: 0px;
 }
+
 :deep(.el-transfer__button:first-child) {
   margin-bottom: 10px;
 }
+
 :deep(.el-dropdown-menu__item) {
   line-height: 30px;
   padding: 0 17px;

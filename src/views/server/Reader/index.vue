@@ -147,7 +147,7 @@
 </template>
 
 <script setup name="Reader">
-import {listReader, getReader, delReader, addReader, updateReader} from "@/api/server/Reader";
+import {addReader, delReader, getReader, listReader, updateReader} from "@/api/server/Reader";
 
 const {proxy} = getCurrentInstance();
 
