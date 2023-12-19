@@ -160,11 +160,12 @@
         </el-form-item>
         <el-form-item label="类型" prop="bookType" style="width: 100%">
           <el-select v-model="form.bookType" placeholder="请选择类型" lable-with="60px">
+            <!--?赋值查询表单对象-->
             <el-option
                 v-for="item in typeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item"
+                :label="item"
+                :value="item">
             </el-option>
           </el-select>
         </el-form-item>
@@ -216,7 +217,7 @@ const title = ref("");
 //! data 构建
 const data = reactive({
   //! 修改部分：添加了一个 typeOptions 数组，用来存储从后端获取的类型列表
-  typeOptions: [],
+  typeOptions: {},
   form: {},
   queryParams: {
     pageNum: 1,
@@ -246,7 +247,8 @@ const data = reactive({
 
 });
 
-const {queryParams, form, rules} = toRefs(data);
+
+let {queryParams, form, typeOptions, rules} = toRefs(data); //这个是解构赋值, 用于将响应式对象解构为单个属性
 
 /** 查询书籍列表 */
 function getList() {
@@ -364,9 +366,8 @@ function handleExport() {
 onMounted(() => {
   getList();
   getTypeOptions().then(response => {
-    proxy.$modal.msgSuccess("获取图书列表成功");
-    console.log(response.data);
+    // proxy.$modal.msgSuccess("获取图书列表成功");
+    typeOptions = response.rows;
   });
-
 });
 </script>
