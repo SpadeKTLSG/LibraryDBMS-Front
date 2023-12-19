@@ -364,7 +364,7 @@ function handleExport() {
 onMounted(() => {
   getList();
   getTypeOptions().then(response => {
-    proxy.$modal.msgSuccess("sadasd成功");
+    proxy.$modal.msgSuccess("获取图书列表成功");
     console.log(response.data);
   });
 

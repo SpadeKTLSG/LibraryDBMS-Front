@@ -91,7 +91,8 @@ service.interceptors.response.use(res => {
                 }).then(() => {
                     isRelogin.show = false;
                     useUserStore().logOut().then(() => {
-                        location.href = '/index';
+                        // location.href = '/index';
+                        location.reload(); //下次打开默认回到上一次的工作页面
                     })
                 }).catch(() => {
                     isRelogin.show = false;
