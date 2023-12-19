@@ -363,6 +363,10 @@ function handleExport() {
 // 修改部分：在 mounted 钩子中调用了 getTypeOptions 方法，以便在页面加载时就获取类型列表
 onMounted(() => {
   getList();
-  getTypeOptions();
+  getTypeOptions().then(response => {
+    proxy.$modal.msgSuccess("sadasd成功");
+    console.log(response.data);
+  });
+
 });
 </script>
