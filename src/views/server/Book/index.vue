@@ -149,7 +149,7 @@
         @pagination="getList"
     />
 
-    <!-- 添加或修改书籍对话框 -->
+    <!-- ! 添加或修改书籍对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="BookRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="名称" prop="bookName">
@@ -195,6 +195,8 @@
         </div>
       </template>
     </el-dialog>
+
+
   </div>
 </template>
 
@@ -233,16 +235,62 @@ const data = reactive({
     borrowedNumber: null,
     inLibrariesNumber: null
   },
-  rules: { //!前端非空判定
+  rules: { //!RULE 新增校验规则
     bookName: [
-      {required: true, message: "名称不能为空", trigger: "blur"}
+      {required: true, message: "名称不能为空", trigger: "blur"},
+      {pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/, message: "名称字段非法", trigger: "blur"}
     ],
     author: [
-      {required: true, message: "作者不能为空", trigger: "blur"}
+      {required: true, message: "作者不能为空", trigger: "blur"},
+      {pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/, message: "作者字段非法", trigger: "blur"}
     ],
     bookshelfNumber: [
-      {required: true, message: "书架序号不能为空", trigger: "blur"}
+      {required: true, message: "书架序号不能为空", trigger: "blur"},
+      {pattern: /^[0-9]\d*$/, message: "书架序号必须是整数", trigger: "blur"}
     ],
+    bookPrice: [
+      {pattern: /^\d+(\.\d+)?$/, message: "不合法的价格", trigger: "blur"}
+    ],
+    collectionNumber: [
+      {required: true, message: "收集总数不能为空", trigger: "blur"},
+      {pattern: /^[0-9]\d*$/, message: "收集总数必须是整数", trigger: "blur"},
+      {
+        validator: (rule, value, callback) => {
+          if (value < form.borrowedNumber + form.inLibrariesNumber) {
+            callback(new Error("收藏数量关系错误"));
+          } else {
+            callback();
+          }
+        }, trigger: "blur"
+      }
+    ],
+    borrowedNumber: [
+      {required: true, message: "借出数量不能为空", trigger: "blur"},
+      {pattern: /^[0-9]\d*$/, message: "借出数量必须是整数", trigger: "blur"},
+      {
+        validator: (rule, value, callback) => {
+          if (value > form.collectionNumber) {
+            callback(new Error("借出数量不能多于收集总数"));
+          } else {
+            callback();
+          }
+        }, trigger: "blur"
+      }
+    ],
+    inLibrariesNumber: [
+      {required: true, message: "持有数量不能为空", trigger: "blur"},
+      {pattern: /^[0-9]\d*$/, message: "持有数量必须是整数", trigger: "blur"},
+      {
+        validator: (rule, value, callback) => {
+          if (value > form.collectionNumber) {
+            console.log(form.collectionNumber + " " + value);
+            callback(new Error("持有数量不能多于收集总数"));
+          } else {
+            callback();
+          }
+        }, trigger: "blur"
+      }
+    ]
   }
 
 });
@@ -323,7 +371,7 @@ function handleUpdate(row) {
 
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs["BookRef"].validate(valid => {
+  proxy.$refs["BookRef"].validate((valid) => {
     if (valid) {
       if (form.value.bookId != null) {
         updateBook(form.value).then(response => {
