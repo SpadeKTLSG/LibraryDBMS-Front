@@ -1,4 +1,17 @@
 <template>
+
+  <!--标题介绍内容-->
+  <el-row>
+    <h1 style="margin: 10px 0 0 20px;">借阅关系管理</h1>
+  </el-row>
+  <br/>
+  <el-row>
+    <h4 style="margin: 10px 0 0 20px;">借阅关系管理模块，用查看当前的借阅关系表</h4>
+  </el-row>
+  <br/>
+  <el-divider></el-divider>
+
+
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="借出时间" prop="bookBorrowTime">
@@ -139,6 +152,8 @@
       </template>
     </el-dialog>
   </div>
+
+
 </template>
 
 <script setup name="Borrow">

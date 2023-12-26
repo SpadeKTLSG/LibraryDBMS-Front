@@ -1,5 +1,18 @@
 <template>
+
   <div class="app-container">
+
+    <!--标题介绍内容-->
+    <el-row>
+      <h1 style="margin: 10px 0 0 20px;">员工管理</h1>
+    </el-row>
+    <br/>
+    <el-row>
+      <h4 style="margin: 10px 0 0 20px;">员工管理模块，用于管理员工</h4>
+    </el-row>
+    <br/>
+    <el-divider></el-divider>
+
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="员工姓名" prop="staffName">
         <el-input
@@ -30,6 +43,7 @@
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
+
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -77,6 +91,7 @@
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
+
     <el-table v-loading="loading" :data="StaffList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="员工号" align="center" prop="staffId"/>
@@ -99,6 +114,7 @@
         @pagination="getList"
     />
 
+
     <!-- 添加或修改员工对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="StaffRef" :model="form" :rules="rules" label-width="80px">
@@ -120,6 +136,8 @@
       </template>
     </el-dialog>
   </div>
+
+
 </template>
 
 <script setup name="Staff">

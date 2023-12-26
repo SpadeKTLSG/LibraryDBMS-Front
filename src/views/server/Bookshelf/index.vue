@@ -1,5 +1,18 @@
 <template>
   <div class="app-container">
+
+    <!--标题介绍内容-->
+    <el-row>
+      <h1 style="margin: 10px 0 0 20px;">书架管理</h1>
+    </el-row>
+    <br/>
+    <el-row>
+      <h4 style="margin: 10px 0 0 20px;">书架管理模块，用于查看当前图书馆拥有书架,非必须不可进行修改</h4>
+    </el-row>
+    <br/>
+    <el-divider></el-divider>
+
+    <!--    搜索-->
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="书架类型" prop="bookshelfType">
         <el-input
@@ -16,38 +29,40 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
-        <el-button
-            type="primary"
-            plain
-            icon="Plus"
-            @click="handleAdd"
-            v-hasPermi="['server:Bookshelf:add']"
-        >新增
-        </el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-            type="success"
-            plain
-            icon="Edit"
-            :disabled="single"
-            @click="handleUpdate"
-            v-hasPermi="['server:Bookshelf:edit']"
-        >修改
-        </el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-            type="danger"
-            plain
-            icon="Delete"
-            :disabled="multiple"
-            @click="handleDelete"
-            v-hasPermi="['server:Bookshelf:remove']"
-        >删除
-        </el-button>
-      </el-col>
+      <!--      新增只能通过后端手动修改-->
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--            type="primary"-->
+      <!--            plain-->
+      <!--            icon="Plus"-->
+      <!--            @click="handleAdd"-->
+      <!--            v-hasPermi="['server:Bookshelf:add']"-->
+      <!--        >新增-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--            type="success"-->
+      <!--            plain-->
+      <!--            icon="Edit"-->
+      <!--            :disabled="single"-->
+      <!--            @click="handleUpdate"-->
+      <!--            v-hasPermi="['server:Bookshelf:edit']"-->
+      <!--        >修改-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
+      <!--      为了维护只能把新增和删除隐藏-->
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--            type="danger"-->
+      <!--            plain-->
+      <!--            icon="Delete"-->
+      <!--            :disabled="multiple"-->
+      <!--            @click="handleDelete"-->
+      <!--            v-hasPermi="['server:Bookshelf:remove']"-->
+      <!--        >删除-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
       <el-col :span="1.5">
         <el-button
             type="warning"
@@ -120,7 +135,10 @@ const data = reactive({
     pageSize: 10,
     bookshelfType: null
   },
-  rules: {}
+  rules: {
+    //RULE - 无新增
+
+  }
 });
 
 const {queryParams, form, rules} = toRefs(data);

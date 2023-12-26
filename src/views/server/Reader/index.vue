@@ -1,5 +1,18 @@
 <template>
+
   <div class="app-container">
+
+    <!--标题介绍内容-->
+    <el-row>
+      <h1 style="margin: 10px 0 0 20px;">读者管理</h1>
+    </el-row>
+    <br/>
+    <el-row>
+      <h4 style="margin: 10px 0 0 20px;">读者管理模块，用于管理读者</h4>
+    </el-row>
+    <br/>
+    <el-divider></el-divider>
+
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="读者姓名" prop="readerName">
         <el-input
@@ -124,7 +137,16 @@
           <el-input v-model="form.readerName" placeholder="请输入读者姓名"/>
         </el-form-item>
         <el-form-item label="读者类型" prop="readerType">
-          <el-input v-model="form.readerType" placeholder="请输入读者类型"/>
+          <!--          <el-input v-model="form.readerType" placeholder="请输入读者类型"/>-->
+          <el-select v-model="form.readerType" placeholder="请选择类型" lable-with="60px">
+            <!--?赋值查询表单对象-->
+            <el-option
+                v-for="item in typeOptions"
+                :key="item"
+                :label="item"
+                :value="item">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-input v-model="form.sex" placeholder="请输入性别"/>
@@ -148,6 +170,7 @@
 
 <script setup name="Reader">
 import {addReader, delReader, getReader, listReader, updateReader} from "@/api/server/Reader";
+import {getTypeOptions} from "@/api/server/Reader.js";
 
 const {proxy} = getCurrentInstance();
 
@@ -162,6 +185,8 @@ const total = ref(0);
 const title = ref("");
 
 const data = reactive({
+  //! 修改部分：添加了一个 typeOptions 数组，用来存储从后端获取的类型列表
+  typeOptions: {},
   form: {},
   queryParams: {
     pageNum: 1,
@@ -174,15 +199,17 @@ const data = reactive({
   },
   rules: {
     readerName: [
-      {required: true, message: "读者姓名不能为空", trigger: "blur"}
+      {required: true, message: "读者姓名不能为空", trigger: "blur"},
+      {pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/, message: "姓名字段非法", trigger: "blur"}
     ],
-    readerType: [
-      {required: true, message: "读者类型不能为空", trigger: "blur"}
-    ],
+    sex: [
+      {required: true, message: "性别不能为空", trigger: "blur"},
+      {pattern: /^[0-1]$/, message: "性别字段非法", trigger: "blur"}
+    ]
   }
 });
 
-const {queryParams, form, rules} = toRefs(data);
+let {queryParams, form, rules, typeOptions} = toRefs(data);
 
 /** 查询读者列表 */
 function getList() {
@@ -252,6 +279,9 @@ function handleUpdate(row) {
 
 /** 提交按钮 */
 function submitForm() {
+  //bugfix :Error updating database.  Cause: java.sql.SQLException: Field 'reader_type' doesn't have a default value
+  //cause: reader_type 字段没有默认值
+
   proxy.$refs["ReaderRef"].validate(valid => {
     if (valid) {
       if (form.value.cardNumber != null) {
@@ -290,5 +320,12 @@ function handleExport() {
   }, `Reader_${new Date().getTime()}.xlsx`)
 }
 
-getList();
+// 修改部分：在 mounted 钩子中调用了 getTypeOptions 方法，以便在页面加载时就获取类型列表
+onMounted(() => {
+  getList();
+  getTypeOptions().then(response => {
+    // proxy.$modal.msgSuccess("获取读者类型列表成功");
+    typeOptions = response.rows;
+  });
+});
 </script>

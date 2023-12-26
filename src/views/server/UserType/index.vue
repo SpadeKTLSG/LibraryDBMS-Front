@@ -1,5 +1,17 @@
 <template>
   <div class="app-container">
+
+    <!--标题介绍内容-->
+    <el-row>
+      <h1 style="margin: 10px 0 0 20px;">类型管理</h1>
+    </el-row>
+    <br/>
+    <el-row>
+      <h4 style="margin: 10px 0 0 20px;">对象类型管理模块，用于查看当前图书馆设置的读者类型, 非必要不可修改</h4>
+    </el-row>
+    <br/>
+    <el-divider></el-divider>
+
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="最长借阅" prop="canBorrowingTime">
         <el-input
@@ -23,17 +35,18 @@
       </el-form-item>
     </el-form>
 
+
     <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
-        <el-button
-            type="primary"
-            plain
-            icon="Plus"
-            @click="handleAdd"
-            v-hasPermi="['server:UserType:add']"
-        >新增
-        </el-button>
-      </el-col>
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--            type="primary"-->
+      <!--            plain-->
+      <!--            icon="Plus"-->
+      <!--            @click="handleAdd"-->
+      <!--            v-hasPermi="['server:UserType:add']"-->
+      <!--        >新增-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
       <el-col :span="1.5">
         <el-button
             type="success"
@@ -45,17 +58,17 @@
         >修改
         </el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-            type="danger"
-            plain
-            icon="Delete"
-            :disabled="multiple"
-            @click="handleDelete"
-            v-hasPermi="['server:UserType:remove']"
-        >删除
-        </el-button>
-      </el-col>
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--            type="danger"-->
+      <!--            plain-->
+      <!--            icon="Delete"-->
+      <!--            :disabled="multiple"-->
+      <!--            @click="handleDelete"-->
+      <!--            v-hasPermi="['server:UserType:remove']"-->
+      <!--        >删除-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
       <el-col :span="1.5">
         <el-button
             type="warning"
@@ -68,6 +81,7 @@
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
+
 
     <el-table v-loading="loading" :data="UserTypeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>

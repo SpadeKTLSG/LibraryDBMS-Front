@@ -2,6 +2,19 @@
 
   <div class="app-container">
 
+    <!--标题介绍内容-->
+    <el-row>
+      <h1 style="margin: 10px 0 0 20px;">书籍管理</h1>
+    </el-row>
+    <br/>
+    <el-row>
+      <h4 style="margin: 10px 0 0 20px;">书籍管理模块，用于管理图书的增删改查以及借阅逻辑实现</h4>
+    </el-row>
+    <br/>
+    <el-divider></el-divider>
+
+    <!--  搜索表单  -->
+
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="名称" prop="bookName">
         <el-input
@@ -73,7 +86,8 @@
       </el-form-item>
     </el-form>
 
-    <!--    -->
+
+    <!--  按钮逻辑  -->
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button

@@ -166,6 +166,18 @@
           </template>
 
           <el-collapse accordion>
+            <el-collapse-item title="v0.6 - 2023-12-26">
+              <ol>
+                <li>前端基本完成</li>
+                <li>前后端联调</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v0.5 - 2023-12-20">
+              <ol>
+                <li>前端逻辑</li>
+                <li>后端建设</li>
+              </ol>
+            </el-collapse-item>
             <el-collapse-item title="v0.1 - 2023-12-09">
               <ol>
                 <li>代码生成</li>
@@ -193,7 +205,7 @@
           </template>
           <div class="body">
             <p>
-              <i class="el-icon-s-promotion"></i> 项目介绍
+              <i class="el-icon-s-promotion"></i> 前端项目
               <el-link
                   href="https://gitee.com/SpadeKTLSG/library-dbms-front"
                   target="_blank"
@@ -202,9 +214,36 @@
               </el-link>
             </p>
             <p>
-              <i class="el-icon-s-promotion"></i> 成员介绍
+              <i class="el-icon-s-promotion"></i> 前端成员
               <el-link
-                  href="https://gitee.com/SpadeKTLSG/library-dbms-front"
+                  href="https://github.com/SpadeKtlsg"
+                  target="_blank"
+              >
+                MORE
+              </el-link>
+            </p>
+            <p>
+              <i class="el-icon-s-promotion"></i> 后端项目
+              <el-link
+                  href="https://gitee.com/SpadeKTLSG/LibraryDBMS"
+                  target="_blank"
+              >
+                MORE
+              </el-link>
+            </p>
+            <p>
+              <i class="el-icon-s-promotion"></i> 后端成员
+              <el-link
+                  href="https://github.com/SpadeKtlsg"
+                  target="_blank"
+              >
+                MORE
+              </el-link>
+            </p>
+            <p>
+              <i class="el-icon-s-promotion"></i> 负责人
+              <el-link
+                  href="https://github.com/SpadeKtlsg"
                   target="_blank"
               >
                 MORE

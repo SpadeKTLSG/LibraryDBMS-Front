@@ -42,3 +42,11 @@ export function delReader(cardNumber) {
         method: 'delete'
     })
 }
+
+// 查询读者类型列表
+export function getTypeOptions() {
+    return request({
+        url: '/server/Reader/getTypeOptions',
+        method: 'get'
+    })
+}
