@@ -6,11 +6,11 @@
       <el-col :sm="24" :lg="12" style="padding-left: 20px">
         <h2>图书馆管理系统LDBMS</h2>
         <p>
-          LDBMS, Library Database Management System, 图书馆数据库管理系统
-          前端页面由@SpadeKTLSG负责开发和维护
-          后端由@SpadeKTLSG负责若依框架环境搭建和代码生成
-          数据库由@NullBing负责设计和维护, Redis暂时由@SpadeKTLSG本地代理
-          业务功能@ABDWL负责设计和实现
+          LDBMS, Library Database Management System, 图书馆数据库管理系统:
+          前端页面由@SpadeKTLSG负责开发和维护;
+          后端由@SpadeKTLSG负责若依框架环境搭建和代码生成;
+          数据库由@NullBing负责设计和维护, Redis暂时由@SpadeKTLSG本地代理;
+          业务功能@ABDWL负责设计和实现;
         </p>
         <p>
           <b>Version </b> <span>v{{ version }}</span>
@@ -166,7 +166,15 @@
           </template>
 
           <el-collapse accordion>
-            <el-collapse-item title="v0.6 - 2023-12-26">
+
+            <el-collapse-item title="v1.0 - 2023-12-26">
+              <ol>
+                <li>前端完成封存</li>
+                <li>后端bugFix</li>
+                <li>前端开发解散</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v0.8 - 2023-12-25">
               <ol>
                 <li>前端基本完成</li>
                 <li>前后端联调</li>
