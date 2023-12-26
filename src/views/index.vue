@@ -234,7 +234,7 @@
             <p>
               <i class="el-icon-s-promotion"></i> 后端成员
               <el-link
-                  href="https://github.com/SpadeKtlsg"
+                  href="https://gitee.com/d3athm"
                   target="_blank"
               >
                 MORE
@@ -243,7 +243,7 @@
             <p>
               <i class="el-icon-s-promotion"></i> 负责人
               <el-link
-                  href="https://github.com/SpadeKtlsg"
+                  href="https://gitee.com/wfedsfsdewfegegwdasdaswqeq"
                   target="_blank"
               >
                 MORE

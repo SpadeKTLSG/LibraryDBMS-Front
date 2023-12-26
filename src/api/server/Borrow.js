@@ -51,3 +51,21 @@ export function listReaderBorrow(query) {
         params: query
     })
 }
+
+//! add借阅关系
+export function addReaderBorrow(data) {
+    return request({
+        url: '/server/Borrow/Add',
+        method: 'post',
+        data: data
+    })
+}
+
+//! update借阅关系
+export function updateReaderBorrow(data) {
+    return request({
+        url: '/server/Borrow/Update',
+        method: 'put',
+        data: data
+    })
+}

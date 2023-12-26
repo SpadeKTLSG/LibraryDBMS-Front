@@ -66,15 +66,16 @@
 
     <!--    -->
     <el-row :gutter="10" class="mb8">
-      <!--      <el-col :span="1.5">-->
-      <!--        <el-button-->
-      <!--          type="primary"-->
-      <!--          plain-->
-      <!--          icon="Plus"-->
-      <!--          @click="handleAdd"-->
-      <!--          v-hasPermi="['server:Borrow:add']"-->
-      <!--        >新增</el-button>-->
-      <!--      </el-col>-->
+      <el-col :span="1.5">
+        <el-button
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['server:Borrow:add']"
+        >借书
+        </el-button>
+      </el-col>
       <el-col :span="1.5">
         <el-button
             type="success"
@@ -83,7 +84,7 @@
             :disabled="single"
             @click="handleUpdate"
             v-hasPermi="['server:Borrow:edit']"
-        >修改
+        >还书
         </el-button>
       </el-col>
       <el-col :span="1.5">
@@ -142,9 +143,56 @@
         @pagination="getList"
     />
 
-    <!-- 添加或修改借阅对话框 -->
+    <!-- 原版添加或修改借阅对话框 -->
+    <!--    <el-dialog :title="title" v-model="open" width="500px" append-to-body>-->
+
+    <!--      <el-form ref="BorrowRef" :model="form" :rules="rules" label-width="80px">-->
+
+    <!--        <el-form-item label="借出时间" prop="bookBorrowTime">-->
+    <!--          <el-date-picker clearable-->
+    <!--                          v-model="form.bookBorrowTime"-->
+    <!--                          type="date"-->
+    <!--                          value-format="YYYY-MM-DD"-->
+    <!--                          placeholder="请选择借出时间">-->
+    <!--          </el-date-picker>-->
+    <!--        </el-form-item>-->
+    <!--        <el-form-item label="归还时间" prop="bookReturnTime">-->
+    <!--          <el-date-picker clearable-->
+    <!--                          v-model="form.bookReturnTime"-->
+    <!--                          type="date"-->
+    <!--                          value-format="YYYY-MM-DD"-->
+    <!--                          placeholder="请选择归还时间">-->
+    <!--          </el-date-picker>-->
+    <!--        </el-form-item>-->
+    <!--        <el-form-item label="是否还书" prop="isReturn">-->
+    <!--          <el-input v-model="form.isReturn" placeholder="请输入是否还书"/>-->
+    <!--        </el-form-item>-->
+    <!--      </el-form>-->
+
+    <!--      &lt;!&ndash;      &ndash;&gt;-->
+    <!--      <template #footer>-->
+    <!--        <div class="dialog-footer">-->
+    <!--          <el-button type="primary" @click="submitForm">确 定</el-button>-->
+    <!--          <el-button @click="cancel">取 消</el-button>-->
+    <!--        </div>-->
+    <!--      </template>-->
+
+    <!--    </el-dialog>-->
+
+
+    <!--!  自定义添加或修改借阅关系对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
+
       <el-form ref="BorrowRef" :model="form" :rules="rules" label-width="80px">
+
+        <el-form-item label="卡号" prop="cardNumber">
+          <el-input v-model="form.cardNumber" placeholder="请输入借阅者卡号"/>
+        </el-form-item>
+
+        <el-form-item label="书籍号" prop="bookNumber">
+          <el-input v-model="form.bookNumber" placeholder="请输入书籍号码"/>
+        </el-form-item>
+
         <el-form-item label="借出时间" prop="bookBorrowTime">
           <el-date-picker clearable
                           v-model="form.bookBorrowTime"
@@ -153,6 +201,7 @@
                           placeholder="请选择借出时间">
           </el-date-picker>
         </el-form-item>
+
         <el-form-item label="归还时间" prop="bookReturnTime">
           <el-date-picker clearable
                           v-model="form.bookReturnTime"
@@ -161,16 +210,21 @@
                           placeholder="请选择归还时间">
           </el-date-picker>
         </el-form-item>
+
         <el-form-item label="是否还书" prop="isReturn">
           <el-input v-model="form.isReturn" placeholder="请输入是否还书"/>
         </el-form-item>
+
       </el-form>
+
+      <!--      -->
       <template #footer>
         <div class="dialog-footer">
           <el-button type="primary" @click="submitForm">确 定</el-button>
           <el-button @click="cancel">取 消</el-button>
         </div>
       </template>
+
     </el-dialog>
   </div>
 
