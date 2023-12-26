@@ -1,18 +1,38 @@
 <template>
 
-  <!--标题介绍内容-->
-  <el-row>
-    <h1 style="margin: 10px 0 0 20px;">借阅关系管理</h1>
-  </el-row>
-  <br/>
-  <el-row>
-    <h4 style="margin: 10px 0 0 20px;">借阅关系管理模块，用查看当前的借阅关系表</h4>
-  </el-row>
-  <br/>
-  <el-divider></el-divider>
-
 
   <div class="app-container">
+
+    <!--标题介绍内容-->
+    <el-row>
+      <h1 style="margin: 10px 0 0 20px;">借阅关系管理</h1>
+    </el-row>
+    <br/>
+    <el-row>
+      <h4 style="margin: 10px 0 0 20px;">借阅关系管理模块，用查看当前的借阅关系表</h4>
+    </el-row>
+    <br/>
+    <el-divider></el-divider>
+
+    <!--! 自定义查询列表2-->
+    <el-form :model="selectParams" ref="queryRef2" :inline="true" v-show="showSearch" label-width="68px">
+      <el-form-item label="单人查询" prop="cardNumber">
+
+        <el-input
+            v-model="selectParams.cardNumber"
+            placeholder="请输入人卡号"
+            clearable
+            @keyup.enter="handleQuery2"
+        />
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" icon="Search" @click="handleQuery2">搜索</el-button>
+        <el-button icon="Refresh" @click="resetQuery2">重置</el-button>
+      </el-form-item>
+    </el-form>
+
+    <!--  查询列表1  -->
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="借出时间" prop="bookBorrowTime">
         <el-date-picker clearable
@@ -44,8 +64,8 @@
       </el-form-item>
     </el-form>
 
+    <!--    -->
     <el-row :gutter="10" class="mb8">
-      <!--      TODO 生成借书关系另外实现, 这里不能生成-->
       <!--      <el-col :span="1.5">-->
       <!--        <el-button-->
       <!--          type="primary"-->
@@ -90,6 +110,7 @@
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
+    <!--    下方加载页-->
     <el-table v-loading="loading" :data="BorrowList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="人卡号" align="center" prop="cardNumber"/>
@@ -157,7 +178,9 @@
 </template>
 
 <script setup name="Borrow">
-import {addBorrow, delBorrow, getBorrow, listBorrow, updateBorrow} from "@/api/server/Borrow";
+import {addBorrow, delBorrow, getBorrow, listBorrow, listReaderBorrow, updateBorrow} from "@/api/server/Borrow";
+import {parseTime} from "../../../utils/ruoyi.js";
+
 
 const {proxy} = getCurrentInstance();
 
@@ -173,6 +196,13 @@ const title = ref("");
 
 const data = reactive({
   form: {},
+  //! 自定义查询cardNumber对应的借阅关系
+  selectParams: {
+    pageNum: 1,
+    pageSize: 10,
+    cardNumber: null
+  },
+
   queryParams: {
     pageNum: 1,
     pageSize: 10,
@@ -200,7 +230,7 @@ const data = reactive({
   }
 });
 
-const {queryParams, form, rules} = toRefs(data);
+let {selectParams, queryParams, form, rules} = toRefs(data);
 
 /** 查询借阅列表 */
 function getList() {
@@ -211,6 +241,17 @@ function getList() {
     loading.value = false;
   });
 }
+
+/** 查询读者借阅列表 */
+function getReaderList() {
+  loading.value = true;
+  listReaderBorrow(selectParams.value).then(response => {
+    BorrowList.value = response.rows;
+    total.value = response.total;
+    loading.value = false;
+  });
+}
+
 
 // 取消按钮
 function cancel() {
@@ -236,10 +277,22 @@ function handleQuery() {
   getList();
 }
 
+/** 搜索按钮操作2 */
+function handleQuery2() {
+  selectParams.value.pageNum = 1;
+  getReaderList();
+}
+
 /** 重置按钮操作 */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
+}
+
+/**! 重置按钮操作2 */
+function resetQuery2() {
+  proxy.resetForm("queryRef2");
+  handleQuery2();
 }
 
 // 多选框选中数据
@@ -307,5 +360,7 @@ function handleExport() {
   }, `Borrow_${new Date().getTime()}.xlsx`)
 }
 
-getList();
+onMounted(() => {
+  getList();
+});
 </script>

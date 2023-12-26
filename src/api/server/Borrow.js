@@ -42,3 +42,12 @@ export function delBorrow(cardNumber) {
         method: 'delete'
     })
 }
+
+//! 查询对应读者的借阅列表
+export function listReaderBorrow(query) {
+    return request({
+        url: '/server/Borrow/listReader',
+        method: 'get',
+        params: query
+    })
+}
