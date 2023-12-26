@@ -164,7 +164,21 @@ const data = reactive({
     staffOffice: null,
     staffWages: null
   },
-  rules: {}
+  rules: {
+    //非空
+    staffName: [
+      {required: true, message: "请输入员工姓名", trigger: "blur"},
+      {pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/, message: "姓名字段非法", trigger: "blur"}
+    ],
+    staffOffice: [
+      {required: true, message: "请输入员工科室", trigger: "blur"}
+    ],
+    staffWages: [
+      {required: true, message: "请输入员工薪资", trigger: "blur"},
+      {pattern: /^\d+(\.\d+)?$/, message: "输入不合法", trigger: "blur"}
+    ]
+
+  }
 });
 
 const {queryParams, form, rules} = toRefs(data);

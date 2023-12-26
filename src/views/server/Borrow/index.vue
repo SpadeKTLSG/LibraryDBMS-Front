@@ -180,7 +180,24 @@ const data = reactive({
     bookReturnTime: null,
     isReturn: null
   },
-  rules: {}
+  rules: {
+    //!RULE 新增校验规则
+    //1.借书字段合法性
+    bookBorrowTime: [
+      {required: true, message: "请输入借出时间", trigger: "blur"},
+    ],
+    //2.还书字段合法性
+    bookReturnTime: [
+      {required: true, message: "请输入归还时间", trigger: "blur"},
+    ],
+    //3.是否还书字段合法性
+    isReturn: [
+      {required: true, message: "请输入是否还书", trigger: "blur"},
+      {pattern: /^[0-1]$/, message: "还书字段非法", trigger: "blur"}
+    ],
+
+
+  }
 });
 
 const {queryParams, form, rules} = toRefs(data);
