@@ -247,6 +247,7 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const bookNumber = ref(null);
 
 const data = reactive({
   form: {},
@@ -256,7 +257,7 @@ const data = reactive({
     pageSize: 10,
     cardNumber: null
   },
-
+  borrow:{},
   queryParams: {
     pageNum: 1,
     pageSize: 10,
@@ -284,7 +285,7 @@ const data = reactive({
   }
 });
 
-let {selectParams, queryParams, form, rules} = toRefs(data);
+let {selectParams, queryParams, form, rules ,borrow} = toRefs(data);
 
 /** 查询借阅列表 */
 function getList() {
@@ -352,6 +353,11 @@ function resetQuery2() {
 // 多选框选中数据
 function handleSelectionChange(selection) {
   ids.value = selection.map(item => item.cardNumber);
+  borrow = {
+    cardNumber : selection[0].cardNumber ,
+    bookNumber :selection[0].bookNumber
+  }
+  bookNumber.value = selection.map(item => item.cardNumber);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -365,12 +371,13 @@ function handleAdd() {
 
 /** 修改按钮操作 */
 function handleUpdate(row) {
-  reset();
-  const _cardNumber = row.cardNumber || ids.value
-  getBorrow(_cardNumber).then(response => {
-    form.value = response.data;
-    open.value = true;
-    title.value = "修改借阅";
+
+
+  console.log(borrow)
+
+  updateBorrow(borrow).then(response => {
+    proxy.$modal.msgSuccess("修改成功");
+    getList();
   });
 }
 
@@ -378,19 +385,11 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["BorrowRef"].validate(valid => {
     if (valid) {
-      if (form.value.cardNumber != null) {
-        updateBorrow(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          getList();
-        });
-      } else {
         addBorrow(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功");
           open.value = false;
           getList();
         });
-      }
     }
   });
 }
