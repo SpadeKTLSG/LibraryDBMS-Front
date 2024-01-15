@@ -37,7 +37,7 @@ January:
     - [Gitee](https://gitee.com/SpadeKTLSG/library-dbms-front)
     - [Github](https://github.com/SpadeKTLSG/LibraryDBMS-Front)
 
-Glory to LDB and dev elopers!
+Glory to LDB and developers!
 
 - C - 前端生成 + 界面修改
     - [Github](https://github.com/SpadeKTLSG)
